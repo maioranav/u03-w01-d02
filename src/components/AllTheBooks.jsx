@@ -8,7 +8,6 @@ import scifi from "../jsonlib/scifi.json";
 
 class AllTheBooks extends Component {
   state = {
-    categories: ["fantasy", "history", "horror", "romance", "scifi"],
     genre: null,
     books: null,
   };
@@ -19,9 +18,11 @@ class AllTheBooks extends Component {
           <Row className="justify-content-center my-5">
             <h2 className="mr-3">Scegli un genere: </h2>
             <ButtonGroup aria-label="Select Books Genre">
-              {this.state.categories.map((cat, i) => {
-                return <Button onClick={() => this.setState({ genre: { cat }, books: { cat } })}>{cat.toUpperCase()}</Button>;
-              })}
+              <Button onClick={() => this.setState({ genre: "Fantasy", books: fantasy })}>Fantasy</Button>
+              <Button onClick={() => this.setState({ genre: "History", books: history })}>History</Button>
+              <Button onClick={() => this.setState({ genre: "Horror", books: horror })}>Horror</Button>
+              <Button onClick={() => this.setState({ genre: "Romance", books: romance })}>Romance</Button>
+              <Button onClick={() => this.setState({ genre: "SciFi", books: scifi })}>SciFi</Button>
             </ButtonGroup>
           </Row>
           {this.state.books && (
