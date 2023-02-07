@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <MyNav brand="EpiBooks" />
-      <Welcome title="Epicode's Bookshelf" subtitle="Your Epicode Books at a glance!" />
+      <Welcome title="Epicode's Bookshelf" subtitle="Your Epicode Books at a glance!" className="mt-5" />
       <AllTheBooks />
       <MyFooter content="Made with ❤️ by Vincenzo Maiorana" />
     </div>
