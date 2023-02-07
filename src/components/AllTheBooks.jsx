@@ -16,8 +16,8 @@ class AllTheBooks extends Component {
       <>
         <Container>
           <Row className="justify-content-center my-5">
+            <h2 className="mr-3">Scegli un genere: </h2>
             <ButtonGroup aria-label="Select Books Genre">
-              <h2 className="mr-3">Scegli un genere: </h2>
               <Button
                 onClick={() =>
                   this.setState({ genre: "Fantasy", books: fantasy })
@@ -56,17 +56,19 @@ class AllTheBooks extends Component {
           {this.state.books && (
             <>
               <Row>
-                <h2 className="mb-2">Libri del genere {this.state.genre}</h2>
+                <h2 className="mb-3 text-center w-100">
+                  Libri del genere {this.state.genre}:
+                </h2>
               </Row>
-              <Row className="justify-content-between">
-                {this.state.books.map((book) => (
+              <Row className="justify-content-center justify-content-md-between">
+                {this.state.books.map((book, i) => (
                   <Card style={{ width: "18rem", marginBottom: "2rem" }}>
-                    <Card.Img variant="top" src={book.img} />
-                    <Card.Body>
+                    <Card.Img className="w-100" variant="top" src={book.img} />
+                    <Card.Body className="d-flex flex-column h-100 justify-content-between">
                       <Card.Title>{book.title}</Card.Title>
                       <Card.Text>ASIN: {book.asin}</Card.Text>
                       <Button variant="danger">
-                        {book.price.toFixed(2)} €
+                        Price: {book.price.toFixed(2)} €
                       </Button>
                     </Card.Body>
                   </Card>
