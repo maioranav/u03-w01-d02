@@ -2,7 +2,7 @@ import { Navbar, Nav } from "react-bootstrap";
 
 const MyNav = (props) => {
   return (
-    <Navbar bg="light" expand="md">
+    <Navbar bg="light" expand="md" className="fixed-top">
       <Navbar.Brand href="#">
         <strong>{props.brand}</strong>
       </Navbar.Brand>
