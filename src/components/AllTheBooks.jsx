@@ -62,7 +62,10 @@ class AllTheBooks extends Component {
               </Row>
               <Row className="justify-content-center justify-content-md-between">
                 {this.state.books.map((book, i) => (
-                  <Card style={{ width: "18rem", marginBottom: "2rem" }}>
+                  <Card
+                    style={{ width: "18rem", marginBottom: "2rem" }}
+                    key={`book-${i}`}
+                  >
                     <Card.Img className="w-100" variant="top" src={book.img} />
                     <Card.Body className="d-flex flex-column h-100 justify-content-between">
                       <Card.Title>{book.title}</Card.Title>
