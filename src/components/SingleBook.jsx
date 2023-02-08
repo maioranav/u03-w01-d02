@@ -7,7 +7,7 @@ export class SingleBook extends Component {
   };
 
   handleState = () => {
-    this.setState({ selected: true });
+    this.setState({ selected: !this.state.selected });
   };
 
   render() {
