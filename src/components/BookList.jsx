@@ -12,7 +12,7 @@ export class BookList extends Component {
     if (e === "") {
       await this.setState({ ...this.state, searched: this.state.books });
     } else {
-      let risultati = this.state.books.filter((book) => book.title.includes(e));
+      let risultati = this.state.books.filter((book) => book.title.toLowerCase().includes(e.toLowerCase()));
       await this.setState({ ...this.state, searched: risultati });
     }
   };
