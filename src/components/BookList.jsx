@@ -1,12 +1,11 @@
 import { Component } from "react";
 import { Container, Row, Form } from "react-bootstrap";
 import { SingleBook } from "./SingleBook";
-import fantasy from "../jsonlib/fantasy.json";
 
 export class BookList extends Component {
   state = {
-    books: fantasy,
-    searched: fantasy,
+    books: this.props.booklist,
+    searched: this.props.booklist,
   };
 
   filterBookList = async (e) => {
