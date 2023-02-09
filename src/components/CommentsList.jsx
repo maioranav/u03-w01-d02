@@ -1,8 +1,8 @@
 import { Component } from "react";
 import { Alert, Spinner } from "react-bootstrap";
-import { DeleteComment } from "./DeleteComment";
+import { SingleComment } from "./SingleComment";
 
-export class GetComments extends Component {
+export class CommentsList extends Component {
   state = {
     comments: [],
     isLoading: true,
@@ -38,12 +38,7 @@ export class GetComments extends Component {
           {this.state.error === false && this.state.isLoading === false && this.state.comments.length < 1 && (
             <li>Non ci sono commenti su questo libro.</li>
           )}
-          {this.state.comments.length > 0 &&
-            this.state.comments.map((c) => (
-              <li key={c._id}>
-                <DeleteComment cId={c._id} /> <span className="valutazione">{c.rate}</span> {c.comment}
-              </li>
-            ))}
+          {this.state.comments.length > 0 && this.state.comments.map((c) => <SingleComment {...c} />)}
         </ul>
       </>
     );

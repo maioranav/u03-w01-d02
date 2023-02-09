@@ -1,8 +1,8 @@
 import { Component } from "react";
 import { AddComment } from "./AddComment";
-import { GetComments } from "./GetComments";
+import { CommentsList } from "./CommentsList";
 
-export class Comments extends Component {
+export class CommentArea extends Component {
   state = {
     asin: this.props.asin,
   };
@@ -10,7 +10,7 @@ export class Comments extends Component {
     return (
       <>
         <AddComment asin={this.state.asin} />
-        <GetComments asin={this.state.asin} />
+        <CommentsList asin={this.state.asin} />
       </>
     );
   }
