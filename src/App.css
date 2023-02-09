@@ -7,3 +7,13 @@
 .elencoCommenti {
   list-style-type: none;
 }
+
+.elencoCommenti > li {
+  margin-bottom: 15px;
+}
+
+.valutazione {
+  padding: 3px 7px;
+  background-color: lightgray;
+  border-radius: 50%;
+}
