@@ -11,10 +11,9 @@ export class CommentsList extends Component {
 
   fetchComment = async (asin) => {
     try {
-      let results = await fetch("https://striveschool-api.herokuapp.com/api/comments/" + asin, {
+      let results = await fetch(process.env.REACT_APP_BASEURL + asin, {
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2U0ZTQ1N2EyNDc4ZDAwMTNhMDU3ZjQiLCJpYXQiOjE2NzU5NDc0NDcsImV4cCI6MTY3NzE1NzA0N30.dLC47vqDLv1wEm6K_Y7ks50t-3s-_Z2EABONKbknvvA",
+          Authorization: process.env.REACT_APP_AUTHTOKEN,
         },
       });
       let data = await results.json();
