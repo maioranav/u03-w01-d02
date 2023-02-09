@@ -11,7 +11,6 @@ export class DeleteComment extends Component {
           Authorization: process.env.REACT_APP_AUTHTOKEN,
         },
       });
-      console.log(postComment);
       postComment.ok !== false ? alert("Ho rimosso il tuo comment!") : alert("Qualcosa è andato storto!");
     } catch (err) {
       alert(err);

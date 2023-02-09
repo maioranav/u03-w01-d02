@@ -32,7 +32,6 @@ export class AddComment extends Component {
         },
         body: JSON.stringify(this.state),
       });
-      console.log(postComment);
       postComment.ok !== false ? alert("Grazie per il tuo commento!") : alert("Qualcosa è andato storto!");
     } catch (err) {
       alert(err);
