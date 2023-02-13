@@ -3,6 +3,18 @@ import { AddComment } from "./AddComment";
 import { CommentsList } from "./CommentsList";
 
 export class CommentArea extends Component {
+  state = {
+    needUpdate: false,
+  };
+
+  commentUpdate = () => {
+    this.setState({ ...this.state, needUpdate: true });
+  };
+
+  updated = () => {
+    this.setState({ ...this.state, needUpdate: false });
+  };
+
   render() {
     return (
       <>
@@ -10,8 +22,8 @@ export class CommentArea extends Component {
         <h6>Select a book to read or leave a comment</h6>
         {this.props.asin !== null && (
           <>
-            <AddComment asin={this.props.asin} />
-            <CommentsList asin={this.props.asin} />
+            <AddComment asin={this.props.asin} update={this.commentUpdate} />
+            <CommentsList asin={this.props.asin} needUpdate={this.state.needUpdate} update={this.commentUpdate} updated={this.updated} />
           </>
         )}
       </>

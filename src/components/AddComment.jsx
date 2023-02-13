@@ -5,7 +5,6 @@ export class AddComment extends Component {
   state = {
     comment: "",
     rate: "1",
-    elementId: this.props.asin,
   };
 
   handleState = (e) => {
@@ -30,9 +29,10 @@ export class AddComment extends Component {
           "Content-Type": "application/json",
           Authorization: process.env.REACT_APP_AUTHTOKEN,
         },
-        body: JSON.stringify(this.state),
+        body: JSON.stringify({ ...this.state, elementId: this.props.asin }),
       });
       postComment.ok !== false ? alert("Grazie per il tuo commento!") : alert("Qualcosa è andato storto!");
+      this.props.update();
     } catch (err) {
       alert(err);
     }
