@@ -12,6 +12,7 @@ export class DeleteComment extends Component {
         },
       });
       postComment.ok !== false ? alert("Ho rimosso il tuo comment!") : alert("Qualcosa è andato storto!");
+      this.props.update();
     } catch (err) {
       alert(err);
     }

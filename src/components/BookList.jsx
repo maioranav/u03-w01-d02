@@ -6,6 +6,7 @@ export class BookList extends Component {
   state = {
     books: this.props.booklist,
     searched: this.props.booklist,
+    selected: null,
   };
 
   filterBookList = async (e) => {
@@ -30,7 +31,15 @@ export class BookList extends Component {
         </Row>
         <Row className="justify-content-center justify-content-md-between">
           {this.state.searched.map(({ asin, price, title, img }, i) => (
-            <SingleBook asin={asin} price={price.toFixed(2)} title={title} img={img} key={`books-${asin}`} />
+            <SingleBook
+              asin={asin}
+              price={price.toFixed(2)}
+              title={title}
+              img={img}
+              selected={this.props.selected}
+              selState={this.props.handleState}
+              key={`books-${asin}`}
+            />
           ))}
           <SingleBook />
         </Row>

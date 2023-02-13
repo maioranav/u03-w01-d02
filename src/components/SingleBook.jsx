@@ -7,19 +7,18 @@ export class SingleBook extends Component {
     selected: false,
   };
 
-  handleState = () => {
-    this.setState({ selected: !this.state.selected });
-  };
-
   render() {
     return (
-      <Card className={this.state.selected === true ? "cardselezione" : ""} style={{ width: "18rem", marginBottom: "2rem" }} key={this.props.asin}>
-        <Card.Img className="w-100" variant="top" src={this.props.img} onClick={this.handleState} />
+      <Card
+        className={this.props.selected === this.props.asin ? "cardselezione" : ""}
+        style={{ width: "10rem", marginBottom: "2rem" }}
+        key={this.props.asin}
+      >
+        <Card.Img className="w-100" variant="top" src={this.props.img} onClick={() => this.props.selState(this.props.asin)} />
         <Card.Body className="d-flex flex-column h-100 justify-content-between">
           <Card.Title>{this.props.title}</Card.Title>
           <Card.Text>ASIN: {this.props.asin}</Card.Text>
-          <Button variant="danger">Price: {this.props.price} €</Button>
-          {this.state.selected && <CommentArea asin={this.props.asin} />}
+          <Button variant="danger">{this.props.price} €</Button>
         </Card.Body>
       </Card>
     );

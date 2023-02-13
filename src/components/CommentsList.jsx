@@ -7,6 +7,7 @@ export class CommentsList extends Component {
     comments: [],
     isLoading: true,
     error: false,
+    needUpdate: false,
   };
 
   fetchComment = async (asin) => {
@@ -17,14 +18,24 @@ export class CommentsList extends Component {
         },
       });
       let data = await results.json();
-      await this.setState({ ...this.state, comments: data, isLoading: false });
+      await this.setState({ ...this.state, comments: data, isLoading: false, needUpdate: false });
     } catch (e) {
-      this.setState({ ...this.state, error: true, isLoading: false });
+      this.setState({ ...this.state, error: true, isLoading: false, needUpdate: false });
     }
+  };
+
+  commentUpdate = () => {
+    this.setState({ ...this.state, needUpdate: true });
   };
 
   componentDidMount() {
     this.fetchComment(this.props.asin);
+  }
+
+  componentDidUpdate(prevPreps) {
+    if (prevPreps.asin !== this.props.asin || this.state.needUpdate === true) {
+      this.fetchComment(this.props.asin);
+    }
   }
 
   render() {
@@ -37,7 +48,7 @@ export class CommentsList extends Component {
           {this.state.error === false && this.state.isLoading === false && this.state.comments.length < 1 && (
             <li>Non ci sono commenti su questo libro.</li>
           )}
-          {this.state.comments.length > 0 && this.state.comments.map((c) => <SingleComment {...c} key={c._id} />)}
+          {this.state.comments.length > 0 && this.state.comments.map((c) => <SingleComment {...c} key={c._id} update={this.commentUpdate} />)}
         </ul>
       </>
     );
