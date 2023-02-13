@@ -37,7 +37,7 @@ export class CommentsList extends Component {
           {this.state.error === false && this.state.isLoading === false && this.state.comments.length < 1 && (
             <li>Non ci sono commenti su questo libro.</li>
           )}
-          {this.state.comments.length > 0 && this.state.comments.map((c) => <SingleComment {...c} />)}
+          {this.state.comments.length > 0 && this.state.comments.map((c) => <SingleComment {...c} key={c._id} />)}
         </ul>
       </>
     );
