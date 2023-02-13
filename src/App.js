@@ -34,7 +34,7 @@ class App extends Component {
             <Col className="order-1 order-md-0">
               <BookList booklist={fantasy} handleState={this.handleState} selected={this.state.selected} />
             </Col>
-            {this.state.selected !== null && <> <Col xs={8} md={6} lg={4} className="order-0 order-md-1">
+            {this.state.selected !== null && <> <Col xs={10} md={6} lg={4} className="order-0 order-md-1">
               <CommentArea asin={this.state.selected} />
             </Col></>}
           </Row>
