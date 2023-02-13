@@ -34,9 +34,9 @@ class App extends Component {
             <Col>
               <BookList booklist={fantasy} handleState={this.handleState} selected={this.state.selected} />
             </Col>
-            <Col>
+            {this.state.selected !== null && <>  <Col>
               <CommentArea asin={this.state.selected} />
-            </Col>
+            </Col></>}
           </Row>
         </Container>
         <MyFooter content="Made with ❤️ by Vincenzo Maiorana" />

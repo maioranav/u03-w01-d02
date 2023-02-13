@@ -19,7 +19,6 @@ export class CommentArea extends Component {
     return (
       <>
         <h3>Comments Section:</h3>
-        <h6>Select a book to read or leave a comment</h6>
         {this.props.asin !== null && (
           <>
             <AddComment asin={this.props.asin} update={this.commentUpdate} />
