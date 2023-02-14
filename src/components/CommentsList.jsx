@@ -1,15 +1,13 @@
-import { Component } from "react";
+import { useState, useEffect } from "react";
 import { Alert, Spinner } from "react-bootstrap";
 import { SingleComment } from "./SingleComment";
 
-export class CommentsList extends Component {
-  state = {
-    comments: [],
-    isLoading: true,
-    error: false,
-  };
+export const CommentsList = (props) => {
+  const [comments, setComments] = useState([]);
+  const [isLoading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
-  fetchComment = async (asin) => {
+  const fetchComment = async (asin) => {
     try {
       let results = await fetch(process.env.REACT_APP_BASEURL + asin, {
         headers: {
@@ -17,37 +15,33 @@ export class CommentsList extends Component {
         },
       });
       let data = await results.json();
-      await this.setState({ ...this.state, comments: data, isLoading: false });
-      this.props.updated();
+      await setComments(data);
+      await setLoading(false);
+      props.updated();
     } catch (e) {
-      this.setState({ ...this.state, error: true, isLoading: false });
-      this.props.updated();
+      setError(true);
+      setLoading(false);
+      props.updated();
     }
   };
 
-  componentDidMount() {
-    this.fetchComment(this.props.asin);
-  }
+  useEffect(() => {
+    fetchComment(props.asin);
+  }, [props.needUpdate]);
 
-  componentDidUpdate(prevPreps) {
-    if (prevPreps.asin !== this.props.asin || this.props.needUpdate === true) {
-      this.fetchComment(this.props.asin);
-    }
-  }
+  useEffect(() => {
+    fetchComment(props.asin);
+  }, [props.asin]);
 
-  render() {
-    return (
-      <>
-        <h6 className="mt-3">Commenti: </h6>
-        {this.state.isLoading && <Spinner animation="border" variant="danger" />}
-        {this.state.error && <Alert variant="danger"> C'è stato un errore nell'elaborare la richiesta!</Alert>}
-        <ul className="elencoCommenti p-0">
-          {this.state.error === false && this.state.isLoading === false && this.state.comments.length < 1 && (
-            <li>Non ci sono commenti su questo libro.</li>
-          )}
-          {this.state.comments.length > 0 && this.state.comments.map((c) => <SingleComment {...c} key={c._id} update={this.props.update} />)}
-        </ul>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <h6 className="mt-3">Commenti: </h6>
+      {isLoading && <Spinner animation="border" variant="danger" />}
+      {error && <Alert variant="danger"> C'è stato un errore nell'elaborare la richiesta!</Alert>}
+      <ul className="elencoCommenti p-0">
+        {error === false && isLoading === false && comments.length < 1 && <li>Non ci sono commenti su questo libro.</li>}
+        {comments.length > 0 && comments.map((c) => <SingleComment {...c} key={c._id} update={props.update} />)}
+      </ul>
+    </>
+  );
+};

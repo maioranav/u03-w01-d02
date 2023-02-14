@@ -1,31 +1,33 @@
-import { Component } from "react";
 import { AddComment } from "./AddComment";
 import { CommentsList } from "./CommentsList";
+import { useState } from "react";
 
-export class CommentArea extends Component {
-  state = {
-    needUpdate: false,
-  };
+export const CommentArea = (props) => {
+  const [needUpdate, setneedUpdate] = useState(false);
 
-  commentUpdate = () => {
-    this.setState({ ...this.state, needUpdate: true });
-  };
-
-  updated = () => {
-    this.setState({ ...this.state, needUpdate: false });
-  };
-
-  render() {
-    return (
-      <>
-        <h3>Comments Section:</h3>
-        {this.props.asin !== null && (
-          <>
-            <AddComment asin={this.props.asin} update={this.commentUpdate} />
-            <CommentsList asin={this.props.asin} needUpdate={this.state.needUpdate} update={this.commentUpdate} updated={this.updated} />
-          </>
-        )}
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <h3>Comments Section:</h3>
+      {props.asin !== null && (
+        <>
+          <AddComment
+            asin={props.asin}
+            update={() => {
+              setneedUpdate(true);
+            }}
+          />
+          <CommentsList
+            asin={props.asin}
+            needUpdate={needUpdate}
+            update={() => {
+              setneedUpdate(true);
+            }}
+            updated={() => {
+              setneedUpdate(false);
+            }}
+          />
+        </>
+      )}
+    </>
+  );
+};
