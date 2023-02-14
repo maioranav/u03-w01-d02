@@ -31,7 +31,7 @@ const App = () => {
           <Col className="order-1 order-md-0">
             <BookList booklist={fantasy} handleState={handleState} selected={selected} />
           </Col>
-          {selected !== null && <> <Col xs={10} md={6} lg={4} className="order-0 order-md-1 mb-5">
+          {selected !== null && <> <Col xs={10} md={6} lg={4} className="order-0 order-md-1 mb-5 commentColArea">
             <CommentArea asin={selected} />
           </Col></>}
         </Row>
