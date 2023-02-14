@@ -1,26 +1,15 @@
-import { Component } from "react";
+import { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 
-export class AddComment extends Component {
-  state = {
-    comment: "",
-    rate: "1",
-  };
+export const AddComment = (props) => {
+  const [state, setState] = useState({ comment: "", rate: "1" });
 
-  handleState = (e) => {
-    if (e.target.id === "commentInput") {
-      this.setState({ ...this.state, comment: e.target.value });
-    } else {
-      this.setState({ ...this.state, rate: e.target.value });
-    }
-  };
-
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    this.SubmitComment();
+    SubmitComment();
   };
 
-  SubmitComment = async () => {
+  const SubmitComment = async () => {
     try {
       let postComment = await fetch(process.env.REACT_APP_BASEURL, {
         method: "POST",
@@ -29,32 +18,45 @@ export class AddComment extends Component {
           "Content-Type": "application/json",
           Authorization: process.env.REACT_APP_AUTHTOKEN,
         },
-        body: JSON.stringify({ ...this.state, elementId: this.props.asin }),
+        body: JSON.stringify({ ...this.state, elementId: props.asin }),
       });
       postComment.ok !== false ? alert("Grazie per il tuo commento!") : alert("Qualcosa è andato storto!");
-      this.props.update();
+      props.update();
     } catch (err) {
       alert(err);
     }
   };
 
-  render() {
-    return (
-      <Form className="mt-5" onSubmit={this.handleSubmit}>
-        <Form.Group className="mb-3">
-          <Form.Control type="text" id="commentInput" placeholder="Inserisci commento" value={this.state.comment} onChange={this.handleState} />
-        </Form.Group>
-        <Form.Control as="select" className="mb-3" onChange={this.handleState} style={{ marginRight: "20px", display: "inline-block", width: "30%" }}>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </Form.Control>
-        <Button variant="primary" type="submit">
-          Invia
-        </Button>
-      </Form>
-    );
-  }
-}
+  return (
+    <Form className="mt-5" onSubmit={handleSubmit}>
+      <Form.Group className="mb-3">
+        <Form.Control
+          type="text"
+          id="commentInput"
+          placeholder="Inserisci commento"
+          value={state.comment}
+          onChange={(e) => {
+            setState({ ...state, comment: e.target.value });
+          }}
+        />
+      </Form.Group>
+      <Form.Control
+        as="select"
+        className="mb-3"
+        onChange={(e) => {
+          setState({ ...state, rate: e.target.value });
+        }}
+        style={{ marginRight: "20px", display: "inline-block", width: "30%" }}
+      >
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </Form.Control>
+      <Button variant="primary" type="submit">
+        Invia
+      </Button>
+    </Form>
+  );
+};
