@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 
 export const AddComment = (props) => {
@@ -18,7 +18,7 @@ export const AddComment = (props) => {
           "Content-Type": "application/json",
           Authorization: process.env.REACT_APP_AUTHTOKEN,
         },
-        body: JSON.stringify({ ...this.state, elementId: props.asin }),
+        body: JSON.stringify({ ...state, elementId: props.asin }),
       });
       postComment.ok !== false ? alert("Grazie per il tuo commento!") : alert("Qualcosa è andato storto!");
       props.update();

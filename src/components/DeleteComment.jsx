@@ -1,9 +1,7 @@
-import { Component } from "react";
-
-export class DeleteComment extends Component {
-  deleteComment = async () => {
+export const DeleteComment = (props) => {
+  const deleteComment = async () => {
     try {
-      let postComment = await fetch(process.env.REACT_APP_BASEURL + this.props.cId, {
+      let postComment = await fetch(process.env.REACT_APP_BASEURL + props.cId, {
         method: "DELETE",
         headers: {
           Accept: "application/json",
@@ -12,17 +10,15 @@ export class DeleteComment extends Component {
         },
       });
       postComment.ok !== false ? alert("Ho rimosso il tuo comment!") : alert("Qualcosa è andato storto!");
-      this.props.update();
+      props.update();
     } catch (err) {
       alert(err);
     }
   };
 
-  render() {
-    return (
-      <>
-        <span onClick={this.deleteComment}>❌</span>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <span onClick={deleteComment}>❌</span>
+    </>
+  );
+};

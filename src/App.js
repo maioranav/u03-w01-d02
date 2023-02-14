@@ -9,40 +9,36 @@ import MyFooter from "./components/MyFooter"
 import { BookList } from './components/BookList';
 import { Row, Col, Container } from 'react-bootstrap';
 import { CommentArea } from './components/CommentArea';
-import { Component } from 'react';
+import { useState } from 'react';
 
-class App extends Component {
-  state = {
-    selected: null
-  }
+const App = () => {
+  const [selected, setSelected] = useState(null)
 
-  handleState = (value) => {
-    if (value !== this.state.selected) {
-      this.setState({ ...this.state, selected: value });
+  const handleState = (value) => {
+    if (value !== selected) {
+      setSelected(value)
     } else {
-      this.setState({ ...this.state, selected: null });
+      setSelected(null);
     }
   };
 
-  render() {
-    return (
-      <div className="App">
-        <MyNav brand="EpiBooks" />
-        <Welcome title="Epicode's Bookshelf" subtitle="Your Epicode Books at a glance!" className="mt-5" />
-        <Container>
-          <Row>
-            <Col className="order-1 order-md-0">
-              <BookList booklist={fantasy} handleState={this.handleState} selected={this.state.selected} />
-            </Col>
-            {this.state.selected !== null && <> <Col xs={10} md={6} lg={4} className="order-0 order-md-1 mb-5">
-              <CommentArea asin={this.state.selected} />
-            </Col></>}
-          </Row>
-        </Container>
-        <MyFooter content="Made with ❤️ by Vincenzo Maiorana" />
-      </div>
-    )
-  };
-}
+  return (
+    <div className="App">
+      <MyNav brand="EpiBooks" />
+      <Welcome title="Epicode's Bookshelf" subtitle="Your Epicode Books at a glance!" className="mt-5" />
+      <Container>
+        <Row>
+          <Col className="order-1 order-md-0">
+            <BookList booklist={fantasy} handleState={handleState} selected={selected} />
+          </Col>
+          {selected !== null && <> <Col xs={10} md={6} lg={4} className="order-0 order-md-1 mb-5">
+            <CommentArea asin={selected} />
+          </Col></>}
+        </Row>
+      </Container>
+      <MyFooter content="Made with ❤️ by Vincenzo Maiorana" />
+    </div>
+  )
+};
 
 export default App;
